@@ -1,0 +1,32 @@
+        tts = TextToSpeech(this) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                isTtsInitialized = true
+                tts?.language = Locale("hi", "IN")
+                tts?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
+                    override fun onStart(utteranceId: String?) {}
+                    override fun onDone(utteranceId: String?) {
+                        if (utteranceId == "CallAnnounceLoop") {
+                            currentCaller?.let { announceCall(it) }
+                        }
+                    }
+                    override fun onError(utteranceId: String?) {}
+                })
+                pendingCallAnnouncement?.let { 
+                    announceCall(it)
+                    pendingCallAnnouncement = null
+                }
+            }
+        }
+    }
+
+    private var currentCaller: String? = null
+
+    private fun announceCall(caller: String) {
+        currentCaller = caller
+        if (!isTtsInitialized) {
+            pendingCallAnnouncement = caller
+            return
+        }
+        val text = "Sir, $caller ka call aa raha hai."
+        tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "CallAnnounceLoop")
+    }

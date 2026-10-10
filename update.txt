@@ -1,0 +1,1 @@
+I have completely redesigned the Settings screen to match the dark theme, red accents, and component layout visible in the provided reference images. The settings page now features segmented cards with rounded corners for Gemini API Key, Voice & TTS, Prime Contact, Personality Modes, and Advanced Permissions, among others.

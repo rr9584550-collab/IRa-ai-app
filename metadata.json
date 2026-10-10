@@ -1,0 +1,6 @@
+{
+  "name": "Ira",
+  "description": "A real-time AI voice assistant",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
